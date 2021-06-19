@@ -13,6 +13,8 @@ import threading
 from pynput import mouse
 from tinkerforge.ip_connection import IPConnection
 from tinkerforge.brick_master import BrickMaster
+from tinkerforge.bricklet_distance_ir_v2 import BrickletDistanceIRV2
+from tinkerforge.bricklet_industrial_dual_relay import BrickletIndustrialDualRelay
 
 #TinkerForge
 HOST = "192.168.0.25"   #Ersetzen Durch Ipadresse der Wlan-Masterextension
@@ -73,7 +75,7 @@ def apm():
     falue_old=0
     while True:
         time.sleep(1)
-        history_sec.append(falue/2)
+        history_sec.append(falue/2) #Geteilt durch zwei weil das loslasen der tasten/Buttons auch als aktion erkannt wird.
         falue=0
         #print((sum(history_sec[-15:]))/15)
         sys.stdout.write('\r' + 'APM:' +str((sum(history_sec[-15:]))*4))
